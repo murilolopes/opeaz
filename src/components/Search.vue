@@ -13,14 +13,17 @@ export default {
   name: "Search",
   data() {
     return {
-      query: "",
+      query: "avengers",
     };
   },
   methods: {
-    search() {
-      Imdb.fetch(this.query).then((data) => {
-        console.log(data);
-      });
+    async search() {
+      try {
+        const { data } = await Imdb.fetch(this.query);
+        this.$emit("setMovies", data.Search);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
