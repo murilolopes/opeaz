@@ -1,17 +1,15 @@
 <template>
   <div>
     <h1>Resultados</h1>
-    <ul>
-      <li v-for="item in items" :key="item.id">
-        <img :src="item.Poster" :alt="item.Title" />
-        <h2>{{ item.Title }}</h2>
-        <p>{{ item.Year }}</p>
-      </li>
-    </ul>
+    <div v-for="item in items" :key="item.id">
+      <CardMovie :movie="item" />
+    </div>
   </div>
 </template>
 
 <script>
+import CardMovie from "./CardMovie.vue";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Result",
@@ -21,5 +19,6 @@ export default {
       required: true,
     },
   },
+  components: { CardMovie },
 };
 </script>
