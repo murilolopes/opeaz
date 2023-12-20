@@ -1,8 +1,8 @@
-import axios from "./axios";
+import http from "./http";
 
 class Imdb {
   fetch(payload) {
-    return axios.get("", {
+    return http.get("", {
       params: {
         s: payload,
       },
