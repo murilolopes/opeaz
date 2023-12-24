@@ -3,7 +3,9 @@
     <img :src="movie.Poster" :alt="movie.Title" />
     <h2>{{ movie.Title }}</h2>
     <p>{{ movie.Year }}</p>
-    <button @click="favoriteMovie(movie)">Favoritar</button>
+    <button @click="favoriteMovie(movie.imdbID)">
+      {{ movie.favorited === true ? "Desfavoritar" : "Favoritar" }}
+    </button>
   </div>
 </template>
 

@@ -14,18 +14,24 @@ const store = new Vuex.Store({
           state.favoritedMovies.push(payload);
         },
         unfavoritedMovie(state, payload) {
-          state.favoritedMovies = state.favoritedMovies.filter(
-            (movie) => movie.imdbID !== payload.imdbID
-          );
+          const index = state.favoritedMovies.indexOf(payload);
+          state.favoritedMovies.splice(index, 1);
         },
       },
       actions: {
         favoriteMovie(context, payload) {
           const isFavorited = context.state.favoritedMovies.some(
-            (movie) => movie.imdbID === payload.imdbID
+            (movie) => movie === payload
           );
+
           const action = isFavorited ? "unfavoritedMovie" : "favoriteMovie";
+          console.log(1, isFavorited, action, payload);
           context.commit(action, payload);
+        },
+      },
+      getters: {
+        favoritedMovies(state) {
+          return state.favoritedMovies;
         },
       },
     },
