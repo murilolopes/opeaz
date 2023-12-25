@@ -29,10 +29,8 @@ export default {
       this.items.filter((item) => {
         if (this.$store.getters.favoritedMovies.includes(item.imdbID)) {
           item.favorited = true;
-          item.rating = 0;
         } else {
           item.favorited = false;
-          item.rating = 0;
         }
         newMoviesArray.push(item);
       });
