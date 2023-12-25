@@ -6,7 +6,7 @@
           icon
           class="mt-2 mr-2"
           style="position: absolute; top: 0; right: 0"
-          @click="favoriteMovie(movie.imdbID)"
+          @click="favoriteMovie(movie)"
         >
           <v-icon
             :color="
@@ -30,7 +30,7 @@
     <p class="text-center">{{ movie.Year }}</p>
 
     <v-rating
-      v-if="movie.favorited"
+      v-if="rating"
       class="mx-auto"
       empty-icon="mdi-star-outline"
       half-icon="mdi-star-half-full"
@@ -53,6 +53,10 @@ export default {
     movie: {
       type: Object,
       required: true,
+    },
+    rating: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
