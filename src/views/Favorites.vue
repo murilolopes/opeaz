@@ -1,16 +1,35 @@
 <template>
   <div>
-    <Favorited />
+    <h1 class="text-center mb-4">Favoritos</h1>
+    <v-row>
+      <v-col v-for="item in movies" :key="item.id" cols="3" class="pa-2">
+        <CardMovie :movie="item" rating />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
-import Favorited from "@/components/Favorited.vue";
+import CardMovie from "../components/CardMovie.vue";
 
 export default {
-  name: "FavoritedsPage",
-  components: {
-    Favorited,
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Favorited",
+  components: { CardMovie },
+  computed: {
+    movies() {
+      let newMoviesArray = [];
+
+      this.$store.getters.favoritedMoviesIDs.forEach((id) => {
+        newMoviesArray.push(
+          this.$store.getters.favoritedMovies.find(
+            (movie) => movie.imdbID === id
+          )
+        );
+      });
+
+      return newMoviesArray;
+    },
   },
 };
 </script>

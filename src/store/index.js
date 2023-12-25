@@ -12,7 +12,6 @@ const store = new Vuex.Store({
       state: {
         favoritedMovies: [],
         favoritedMoviesIDs: [],
-        ratedMovies: [],
       },
       mutations: {
         favoriteMovie(state, payload) {
@@ -22,12 +21,10 @@ const store = new Vuex.Store({
             rating: 0,
             favorited: true,
           });
-          state.ratedMovies.push(0);
         },
         unfavoriteMovie(state, payload) {
           const index = state.favoritedMoviesIDs.indexOf(payload.imdbID);
           state.favoritedMoviesIDs.splice(index, 1);
-          state.ratedMovies.splice(index, 1);
 
           const toRemove = state.favoritedMovies.find(
             (movie) => movie.imdbID === payload.imdbID
