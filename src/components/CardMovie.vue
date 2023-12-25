@@ -18,7 +18,15 @@
       </v-img>
     </div>
 
-    <h2 class="text-center">{{ movie.Title }}</h2>
+    <v-tooltip top>
+      <template v-slot:activator="{ on, attrs }">
+        <h2 class="text-center truncate" v-bind="attrs" v-on="on">
+          {{ movie.Title }}
+        </h2>
+      </template>
+      <span>{{ movie.Title }}</span>
+    </v-tooltip>
+
     <p class="text-center">{{ movie.Year }}</p>
   </v-card>
 </template>
@@ -43,5 +51,14 @@ export default {
 <style>
 .position-relative {
   position: relative;
+}
+
+.truncate {
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
