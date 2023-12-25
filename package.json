@@ -16,6 +16,7 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@mdi/font": "^7.3.67",
     "@rushstack/eslint-patch": "^1.1.0",
     "@vitejs/plugin-legacy": "^2.0.0",
     "@vitejs/plugin-vue2": "^1.1.2",

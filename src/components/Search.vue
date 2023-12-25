@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <input type="text" v-model="query" />
-    <button @click="search">Buscar</button>
+  <div class="d-flex justify-space-between align-center">
+    <v-text-field color="success" v-model="query" :loading="loading" />
+    <v-btn @click="search" :disabled="loading">Buscar</v-btn>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
   name: "Search",
   data() {
     return {
+      loading: false,
       query: "avengers",
       movies: [],
     };
@@ -21,6 +22,7 @@ export default {
   methods: {
     async search() {
       try {
+        this.loading = true;
         const { data } = await Imdb.fetch(this.query);
         data.Search.filter((item) => {
           item.favorited = false;
@@ -29,6 +31,8 @@ export default {
         this.setMovies(data.Search);
       } catch (error) {
         console.log(error);
+      } finally {
+        this.loading = false;
       }
     },
     setMovies(movies) {

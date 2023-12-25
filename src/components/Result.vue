@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1>Resultados</h1>
-    <div v-for="item in movies" :key="item.id">
-      <CardMovie :movie="item" />
-    </div>
+    <h1 class="text-center mb-4" v-show="movies.length">Resultados</h1>
+    <v-row no-gutters>
+      <v-col v-for="item in movies" :key="item.id" cols="3" class="pa-2">
+        <CardMovie :movie="item" />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
