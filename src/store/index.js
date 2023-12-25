@@ -17,6 +17,10 @@ const store = new Vuex.Store({
           const index = state.favoritedMovies.indexOf(payload);
           state.favoritedMovies.splice(index, 1);
         },
+        rateMovie(state, payload) {
+          const index = state.favoritedMovies.indexOf(payload.id);
+          state.favoritedMovies[index].rating = payload.rating;
+        },
       },
       actions: {
         favoriteMovie(context, payload) {
@@ -25,8 +29,14 @@ const store = new Vuex.Store({
           );
 
           const action = isFavorited ? "unfavoritedMovie" : "favoriteMovie";
-          console.log(1, isFavorited, action, payload);
           context.commit(action, payload);
+        },
+        ratingMovie(context, payload) {
+          const isFavorited = context.state.favoritedMovies.some(
+            (movie) => movie === payload
+          );
+
+          if (isFavorited) context.commit("rateMovie", payload);
         },
       },
       getters: {

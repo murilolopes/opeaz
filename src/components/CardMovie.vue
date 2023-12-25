@@ -28,6 +28,19 @@
     </v-tooltip>
 
     <p class="text-center">{{ movie.Year }}</p>
+
+    <v-rating
+      v-if="movie.favorited"
+      class="mx-auto"
+      empty-icon="mdi-star-outline"
+      half-icon="mdi-star-half-full"
+      full-icon="mdi-star"
+      hover
+      length="5"
+      size="22"
+      :value="movie.rating"
+      @input="ratingMovie({ id: movie.imdbID, rating: $event })"
+    />
   </v-card>
 </template>
 
@@ -43,7 +56,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["favoriteMovie"]),
+    ...mapActions(["favoriteMovie", "ratingMovie"]),
   },
 };
 </script>
