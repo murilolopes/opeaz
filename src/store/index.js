@@ -1,9 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import createPersistedState from "vuex-persistedstate";
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+  plugins: [createPersistedState({ storage: window.sessionStorage })],
   modules: {
     app: {
       state: {
@@ -14,10 +17,14 @@ const store = new Vuex.Store({
       mutations: {
         favoriteMovie(state, payload) {
           state.favoritedMoviesIDs.push(payload.imdbID);
-          state.favoritedMovies.push({ ...payload });
+          state.favoritedMovies.push({
+            ...payload,
+            rating: 0,
+            favorited: true,
+          });
           state.ratedMovies.push(0);
         },
-        unfavoritedMovie(state, payload) {
+        unfavoriteMovie(state, payload) {
           const index = state.favoritedMoviesIDs.indexOf(payload.imdbID);
           state.favoritedMoviesIDs.splice(index, 1);
           state.ratedMovies.splice(index, 1);
@@ -32,8 +39,7 @@ const store = new Vuex.Store({
           );
         },
         rateMovie(state, payload) {
-          const index = state.favoritedMoviesIDs.indexOf(payload.id);
-          state.ratedMovies[index] = payload.rating;
+          state.favoritedMovies[payload.index].rating = payload.rating;
         },
       },
       actions: {
@@ -42,15 +48,15 @@ const store = new Vuex.Store({
             (id) => id === payload.imdbID
           );
 
-          const action = isFavorited ? "unfavoritedMovie" : "favoriteMovie";
+          const action = isFavorited ? "unfavoriteMovie" : "favoriteMovie";
           context.commit(action, payload);
         },
         ratingMovie(context, payload) {
-          const isFavorited = context.state.favoritedMoviesIDs.some(
-            (movie) => movie === payload.id
+          const index = context.getters.favoritedMovies.findIndex(
+            (movie) => movie.imdbID === payload.id
           );
 
-          if (isFavorited) context.commit("rateMovie", payload);
+          context.commit("rateMovie", { index, rating: payload.rating });
         },
       },
       getters: {

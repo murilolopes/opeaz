@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center mb-4" v-show="movies.length">Favoritos</h1>
+    <h1 class="text-center mb-4">Favoritos</h1>
     <v-row no-gutters>
       <v-col v-for="item in movies" :key="item.id" cols="3" class="pa-2">
         <CardMovie :movie="item" rating />
