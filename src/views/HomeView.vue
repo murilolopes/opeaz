@@ -1,9 +1,8 @@
 <template>
-  <main>
-    home page
+  <div>
     <search @setMovies="setMovies" />
     <result :items="movies" />
-  </main>
+  </div>
 </template>
 
 <script>

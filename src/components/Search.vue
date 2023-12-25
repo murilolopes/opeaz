@@ -1,8 +1,8 @@
 <template>
-  <main>
+  <div>
     <input type="text" v-model="query" />
     <button @click="search">Buscar</button>
-  </main>
+  </div>
 </template>
 
 <script>
