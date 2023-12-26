@@ -18,17 +18,7 @@ export default {
   components: { CardMovie },
   computed: {
     movies() {
-      let newMoviesArray = [];
-
-      this.$store.getters.favoritedMoviesIDs.forEach((id) => {
-        newMoviesArray.push(
-          this.$store.getters.favoritedMovies.find(
-            (movie) => movie.imdbID === id
-          )
-        );
-      });
-
-      return newMoviesArray;
+      return this.$store.getters.favoritedMovies;
     },
   },
 };

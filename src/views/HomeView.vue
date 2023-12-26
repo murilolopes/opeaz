@@ -1,13 +1,14 @@
 <template>
   <div>
-    <search @setMovies="setMovies" />
-    <result :items="movies" />
+    <search />
+    <result />
   </div>
 </template>
 
 <script>
 import Search from "@/components/Search.vue";
 import Result from "@/components/Result.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "HomeView",
@@ -15,15 +16,11 @@ export default {
     Result,
     Search,
   },
-  data() {
-    return {
-      movies: [],
-    };
+  mounted() {
+    this.clearMovies();
   },
   methods: {
-    setMovies(data) {
-      this.movies = data;
-    },
+    ...mapActions(["clearMovies"]),
   },
 };
 </script>

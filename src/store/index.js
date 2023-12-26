@@ -10,6 +10,7 @@ const store = new Vuex.Store({
   modules: {
     app: {
       state: {
+        movies: [],
         favoritedMovies: [],
         favoritedMoviesIDs: [],
       },
@@ -35,6 +36,20 @@ const store = new Vuex.Store({
             1
           );
         },
+        fillMovies(state, payload) {
+          if (!payload.length) {
+            state.movies = [];
+            return;
+          }
+
+          state.movies = payload.map((movie) => {
+            movie.favorited = state.favoritedMoviesIDs.includes(movie.imdbID)
+              ? true
+              : false;
+
+            return movie;
+          });
+        },
         rateMovie(state, payload) {
           state.favoritedMovies[payload.index].rating = payload.rating;
         },
@@ -55,6 +70,12 @@ const store = new Vuex.Store({
 
           context.commit("rateMovie", { index, rating: payload.rating });
         },
+        fillMovies(context, payload) {
+          context.commit("fillMovies", payload);
+        },
+        clearMovies(context) {
+          context.commit("fillMovies", []);
+        },
       },
       getters: {
         favoritedMoviesIDs(state) {
@@ -62,6 +83,18 @@ const store = new Vuex.Store({
         },
         favoritedMovies(state) {
           return state.favoritedMovies;
+        },
+        movies(state) {
+          const newArray = [];
+
+          state.movies.filter((movie) => {
+            if (state.favoritedMoviesIDs.includes(movie.imdbID))
+              movie.favorited = true;
+            else movie.favorited = false;
+            newArray.push(movie);
+          });
+
+          return newArray;
         },
       },
     },

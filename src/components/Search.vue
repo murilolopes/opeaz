@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import Imdb from "@/services/imdb";
 
 export default {
@@ -20,27 +20,19 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["fillMovies"]),
     async search() {
       try {
         this.loading = true;
         const { data } = await Imdb.fetch(this.query);
-        data.Search.filter((item) => {
-          item.favorited = false;
-        });
-        this.movies = data.Search;
-        this.setMovies(data.Search);
+        data.Search.filter((item) => (item.favorited = false));
+        this.fillMovies(data.Search);
       } catch (error) {
         console.log(error);
       } finally {
         this.loading = false;
       }
     },
-    setMovies(movies) {
-      this.$emit("setMovies", movies);
-    },
-  },
-  computed: {
-    ...mapGetters(["favoritedMovies"]),
   },
 };
 </script>
