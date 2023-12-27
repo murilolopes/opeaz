@@ -88,10 +88,11 @@ const store = new Vuex.Store({
           const newArray = [];
 
           state.movies.filter((movie) => {
-            if (state.favoritedMoviesIDs.includes(movie.imdbID))
-              movie.favorited = true;
-            else movie.favorited = false;
-            newArray.push(movie);
+            let newMovie = { ...movie };
+            newMovie.favorited = state.favoritedMoviesIDs.includes(
+              movie.imdbID
+            );
+            newArray.push(newMovie);
           });
 
           return newArray;
