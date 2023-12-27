@@ -2,7 +2,15 @@
   <div>
     <h1 class="text-center mb-4">Favoritos</h1>
     <v-row>
-      <v-col v-for="item in movies" :key="item.id" cols="3" class="pa-2">
+      <v-col
+        class="pa-2"
+        v-for="item in movies"
+        :key="item.id"
+        sm="6"
+        md="4"
+        lg="3"
+        xl="3"
+      >
         <CardMovie :movie="item" rating />
       </v-col>
     </v-row>

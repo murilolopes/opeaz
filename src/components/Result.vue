@@ -2,7 +2,15 @@
   <div>
     <h1 class="text-center mb-4" v-show="movies.length">Resultados</h1>
     <v-row>
-      <v-col v-for="movie in movies" :key="movie.imdbID" cols="3" class="pa-2">
+      <v-col
+        class="pa-2"
+        v-for="movie in movies"
+        :key="movie.imdbID"
+        sm="6"
+        md="4"
+        lg="3"
+        xl="3"
+      >
         <CardMovie :movie="movie" />
       </v-col>
     </v-row>
