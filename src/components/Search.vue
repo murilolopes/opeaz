@@ -1,7 +1,17 @@
 <template>
-  <div class="d-flex justify-space-between align-center">
-    <v-text-field color="success" v-model="query" :loading="loading" />
-    <v-btn @click="search" :disabled="loading">Buscar</v-btn>
+  <div class="d-flex justify-space-between align-top">
+    <v-text-field
+      v-model="query"
+      label="Busca"
+      append-icon="mdi-magnify"
+      @keyup.enter="search"
+      :loading="loading"
+      outlined
+      dense
+    ></v-text-field>
+    <v-btn color="primary" class="ml-2" @click="search" :disabled="loading">
+      Buscar
+    </v-btn>
   </div>
 </template>
 
