@@ -1,6 +1,6 @@
 <template>
   <v-card class="d-flex flex-column">
-    <v-img :src="movie.Poster" :alt="movie.Title" :height="400">
+    <v-img :src="movie.Poster" :alt="movie.Title" class="max-width-img center">
       <v-btn
         icon
         class="mt-2 mr-2"
@@ -64,6 +64,11 @@ export default {
 </script>
 
 <style>
+.max-width-img {
+  max-width: 280px; /* Exemplo de largura máxima */
+  margin: 0 auto; /* Centraliza o elemento */
+}
+
 .truncate {
   padding-left: 8px;
   padding-right: 8px;
